@@ -6,6 +6,34 @@ type HelloWorldModel {
   value: String!
 }
 
+type User {
+  id: ID!
+  username: String!
+  password: String!
+}
+
+type AuthResponse {
+  accessToken: String!
+  user: User!
+}
+
+type Blog {
+  id: ID!
+  content: String!
+  author: User!
+}
+
 type Query {
   sayHello: HelloWorldModel!
+  blogs: [Blog!]!
+}
+
+type Mutation {
+  register(username: String!, password: String!): AuthResponse!
+  login(username: String!, password: String!): AuthResponse!
+  createBlog(content: String!): Blog!
+}
+
+type Subscription {
+  blogCreated: Blog!
 }
